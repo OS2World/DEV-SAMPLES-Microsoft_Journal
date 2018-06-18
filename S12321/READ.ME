@@ -1,0 +1,30 @@
+Here is a sample OS/2 application message file which can be used by
+an application via the DosGetMessage and the DosPutMessage APIs, or
+used by the user via the HELPMSG.EXE utility (which is transparently
+used when the user runs the HELP.BAT or HELP.CMD script files).
+
+The file FOO.TXT contains the error messages; the MAKEFILE runs the
+MKMSGF utility on this file, which generates FOO.MSG. The file 
+FOOH.TXT contains the error message help text; the MAKEFILE runs the 
+MKMSGF utility on this file, which generates FOOH.MSG. [By way of 
+comparision, the files FOO.MSG and FOOH.MSG are roughly analagous in
+functionality to the OS/2 system message files OSO001.MSG and
+OSO001H.MSG.]
+
+To build the .MSG files, type:
+
+    NMAKE
+
+or:
+
+    MAKE MAKEFILE
+
+To see the results, type:
+
+    HELPMSG FOO0001
+
+or use FOO0002-FOO0005 as the messages, since there are only five 
+errors in the message text files. Make sure that the .MSG files
+are in the DPATH (when in OS/2) or in the APPEND path (when in
+the DOS 3.X Box), or in the current directory, so that OS/2 can
+find the files.

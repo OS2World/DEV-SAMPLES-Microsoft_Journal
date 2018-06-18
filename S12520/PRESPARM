@@ -1,0 +1,16 @@
+#--------------------
+# PresParm make file
+#--------------------
+
+PresParm.obj : PresParm.c
+     cl -c -AL -G2sw -W3 -Od -Zi PresParm.c
+
+PresParm.res : PresParm.rc presdemo.dlg aboutbox.dlg
+     rc -r PresParm.rc
+
+PresParm.exe : PresParm.obj PresParm.def
+     link /CO PresParm, /align:16, NUL/NOD/NOE, llibcep os2, PresParm
+     rc PresParm.res
+
+PresParm.exe : PresParm.res
+     rc PresParm.res

@@ -1,0 +1,11 @@
+;-------------------------------------
+; BASE.DEF module definition file
+;-------------------------------------
+
+NAME           BASE  WINDOWAPI
+
+DESCRIPTION    'Changes the system menu icon and its accelerator'
+PROTMODE
+HEAPSIZE       1024
+STACKSIZE      8192
+EXPORTS        ClientWndProc

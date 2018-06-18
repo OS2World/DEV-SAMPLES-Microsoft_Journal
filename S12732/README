@@ -1,0 +1,5 @@
+INIEDIT     This is a version of INIEDIT that has been enhanced to use the
+            Prf* calls to read and write to the INI files.  It also allows
+            the user to select which INI file to read and write.
+
+            John Bartlow 04-May-1990

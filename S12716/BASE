@@ -1,0 +1,16 @@
+#--------------------
+# BASE make file
+#--------------------
+
+base.obj : base.c base.h
+     cl -c -G2sw -W3 base.c
+
+base.res : base.rc base.h base.bmp
+     rc -r base
+
+base.exe : base.obj base.def
+     link base, /align:16, NUL, os2, base
+     rc base.res base.exe
+
+base.exe : base.res
+     rc base.res base.exe

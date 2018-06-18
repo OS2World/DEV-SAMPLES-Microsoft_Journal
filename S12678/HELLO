@@ -1,0 +1,40 @@
+# HELLO makefile 
+# Created by Microsoft Corp., 1988
+#
+
+#===================================================================
+#
+#  Standard command line definitions
+#
+#===================================================================
+
+cp=cl -c -W3 -AS -G2s -Os -Zpei
+
+#===================================================================
+#
+#  Default inference rules
+#
+#===================================================================
+
+.c.obj:
+    $(cp) $*.c
+
+.asm.obj:
+    masm $*.asm;
+
+.rc.res:
+    rc -r $*.rc
+
+#===================================================================
+#
+#  Dependencies
+#
+#===================================================================
+
+hello.obj: hello.c hello.h
+
+hello.res: hello.rc hello.ico hello.h
+
+hello.exe: hello.obj hello.res hello.lnk hello.def
+    link @hello.lnk
+    rc hello.res

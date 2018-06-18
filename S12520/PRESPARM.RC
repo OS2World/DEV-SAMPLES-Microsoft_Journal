@@ -1,0 +1,21 @@
+/*----------------------------------
+  PresParm.RC resource script file
+  ----------------------------------*/
+
+#include <os2.h>
+#include <pmwin.h>
+
+#include "PresParm.h"
+
+MENU ID_RESOURCE
+     {
+     SUBMENU "~Demo",	     IDM_OPTIONS
+	  {
+	  MENUITEM "Dia~log",	       IDM_PLAY
+	  MENUITEM "~About",	       IDM_ABOUT
+	  MENUITEM "E~xit",	       IDM_QUIT
+	  }
+     }
+
+RCINCLUDE PRESDEMO.DLG
+RCINCLUDE ABOUTBOX.DLG

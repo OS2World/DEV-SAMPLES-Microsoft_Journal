@@ -1,0 +1,47 @@
+#===================================================================
+#
+#   server Application Make file
+#
+#===================================================================
+#
+# Default compilation macros
+#
+
+#CC  = cc -DLINT_ARGS -u -c -AM -G2sw -Oas -Zped -PLM
+CC  = cc -c -Gw -Ox -Zpe -AM -PLM
+ASM = masm
+
+#===================================================================
+#
+# Dependencies
+#
+#===================================================================
+
+all: server.exe
+
+server.res: server.rc server.ico server.h
+
+server.obj: server.c server.h makefile
+
+server.exe: server.obj server.res server.def
+	link server, server/codeview, server/map, os2 mlibos2/nod/noe, server.def
+	c:\bin\os2\rc server.res
+	mapsym server
+
+#===================================================================
+#
+# Default inference rules
+#
+#===================================================================
+
+.SUFFIXES: .c .obj .asm .rc .res
+
+.c.obj:
+	$(CC) $*.c
+
+.asm.obj:
+	$(ASM) $*.asm;
+
+.rc.res:
+	c:\bin\os2\rc -r $*.rc
+

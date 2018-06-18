@@ -1,0 +1,14 @@
+FOO
+FOO0000H: EXPLANATION: This is the FOO app explanation for message 0000.
+ACTION: This is the FOO recommended action for message 0000.
+FOO0001H: EXPLANATION: This is the FOO app explanation for message 0001.
+ACTION: This is the FOO recommended action for message 0001.
+FOO0002H: EXPLANATION: This is the FOO app explanation for message 0002.
+ACTION: This is the FOO recommended action for message 0002.
+FOO0003H: EXPLANATION: This is the FOO app explanation for message 0003.
+ACTION: This is the FOO recommended action for message 0003.
+FOO0004H: EXPLANATION: This is the FOO app explanation for message 0004.
+ACTION: This is the FOO recommended action for message 0004.
+FOO0005H: EXPLANATION: This is the FOO app explanation for message 0005.
+ACTION: This is the FOO recommended action for message 0005.
+

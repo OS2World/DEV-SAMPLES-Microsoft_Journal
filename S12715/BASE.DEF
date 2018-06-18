@@ -1,0 +1,12 @@
+;-------------------------------------
+; BASE.DEF module definition file
+;-------------------------------------
+
+NAME	       DARTS	WINDOWAPI
+
+DESCRIPTION    'The Game Of Darts... By Steve Dart'
+PROTMODE
+HEAPSIZE       1024
+STACKSIZE      8192
+EXPORTS        ClientWndProc
+               DlgProc

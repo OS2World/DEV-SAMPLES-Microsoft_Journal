@@ -1,0 +1,8 @@
+.asm.obj :
+   masm rb8042;
+   link rb8042,,,,rb8042;
+   bind rb8042
+
+rb8042.obj: rb8042.asm
+
+rb8042.exe: rb8042.obj

@@ -1,0 +1,17 @@
+#include "os2.h"
+#include "hello.h"
+#include "arcp.h"
+
+rcinclude arcp.dlg
+
+
+POINTER ID_HELLO   hello.ico
+POINTER IDD_ARCICO  arcp.ico
+
+MENU ID_HELLO   PRELOAD
+BEGIN
+    SUBMENU  "Arc", 0x2000
+        BEGIN
+	    MENUITEM "Arc Parameters...",   IDM_OPEN,	MIS_TEXT
+	END
+END

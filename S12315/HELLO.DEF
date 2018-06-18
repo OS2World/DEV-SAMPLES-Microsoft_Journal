@@ -1,0 +1,16 @@
+NAME	HELLO
+
+DESCRIPTION 'Microsoft OS/2 Sample Application'
+
+STUB    'c:\pmsdk\bin\OS2STUB.EXE'
+
+CODE    MOVEABLE
+DATA    MOVEABLE MULTIPLE
+
+HEAPSIZE  1024
+STACKSIZE 8192
+
+EXPORTS
+    HelloWndProc    @1
+    ArcParamDlg     @2
+    ArcParamDlg2    @3

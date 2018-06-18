@@ -1,0 +1,92 @@
+   =======================================================
+   BASIC PDS User Interface (UI) Toolbox Modified for OS/2 
+   =======================================================
+
+ --------------------------------------------------------------------
+| INFORMATION PROVIDED IN THIS DOCUMENT AND ANY SOFTWARE THAT MAY    |
+| ACCOMPANY THIS DOCUMENT (collectively referred to as an            |
+| Application Note) IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY      |
+| KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO    |
+| THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A     |
+| PARTICULAR PURPOSE. The user assumes the entire risk as to the     |
+| accuracy and the use of this Application Note. This Application    |
+| Note may be copied and distributed subject to the following        |
+| conditions: 1) All text must be copied without modification and    |
+| all pages must be included; 2) If software is included, all files  |
+| on the disk(s) must be copied without modification (the DOS        |
+| utility DISKCOPY is appropriate for this purpose); 3) All          |
+| components of this Application Note must be distributed together;  |
+| and 4) This Application Note may not be distributed for profit.    |
+|                                                                    |
+| Copyright 1990 Microsoft Corporation. All Rights Reserved.         |
+| Microsoft and the Microsoft logo are registered trademarks of      |
+| Microsoft Corporation.                                             |
+ --------------------------------------------------------------------
+
+The User Interface (UI) Toolbox sample code provided with Microsoft
+BASIC Professional Development System (PDS) 7.00 and 7.10 is written
+specifically for the MS-DOS operating system, and requires code
+modifications to compile and run under OS/2 protected mode.
+
+The files UIASM.ASM, GENERAL.BAS, MENU.BAS, MOUSE.BAS, and WINDOW.BAS
+require code modifications to work properly under OS/2. These
+modifications are necessary to change over the program from MS-DOS
+interrupt services to the OS/2 API services for each specific
+function.
+
+Microsoft Product Support Services has provided a second set of sample
+UI Toolbox files for use under MS OS/2 protected mode. All the UI
+Toolbox files have been replaced by a modified version, which includes
+all BASIC source code, the assembler code, and all include files. This
+information is provided as is with no guarantees regarding
+performance, and you may freely modify the code.
+
+This package is available in the Microsoft Software/Data Library and 
+can be found by searching on the keyword UIDEMOS2 or S12780. 
+
+The following files are included:
+
+   GENERAL.BAS   GENERAL.BI   MENU.BAS     MENU.BI      MOUSE.BAS
+   MOUSE.BI      WINDOW.BAS   WINDOW.BI    UIDEMO.BAS   UIASM.BAS
+   READ.ME       UIDEMO.MAK   DOSBEEP.BAS
+
+READ.ME is a copy of this article.
+
+UIASM.ASM has been replaced by a BASIC version that calls OS/2 VIO API
+routines called UIASM.BAS.
+
+UIDEMO.MAK is a Programmer's WorkBench (PWB) MAKE file that can be
+used to rebuild an executable UIDEMO program.
+
+DOSBEEP.BAS contains a BSound routine to replace calls to SOUND, which
+is not supported under OS/2.
+
+List of Modifications
+---------------------
+
+In adapting the UI Toolbox code from MS-DOS to OS/2, the main areas we
+have changed are at low levels, normally where the routines make
+specific calls to PEEK, INTERRUPT, GetCopyBox, PutCopyBox, and AttrBox
+routines, or calls to statements that are not supported under OS/2,
+such as the SOUND statement.
+
+All references to the SOUND statement have been replaced by calls to a
+BSOUND routine, which is located in DOSBEEP.BAS. The SOUND statement
+is not supported under OS/2; instead you should use the OS/2 DOSSOUND
+function or the BASIC BEEP statement.
+
+The assembler code located in the original UIASM.ASM has been replaced
+with BASIC code making calls to the OS/2 VIO API routines.
+
+All references to CALL INTERRUPT have been replaced by calls to the
+appropriate OS/2 API calls. The MS-DOS INTERRUPT calls for the mouse
+support now use the OS/2 MOU API. PEEKing in MS-DOS to get the
+keyboard SHIFT state "GetSHIFTState" has been replaced by OS/2 KBD API
+calls.
+
+Various other locations have been modified at high levels in the UI
+Toolbox code to correct performance that would match the MS-DOS
+version of the UI Toolbox.
+
+Most modified areas have been marked with '| comments in the provided
+source code files.

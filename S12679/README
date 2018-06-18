@@ -1,0 +1,13 @@
+
+				FULLSCRN
+
+				Ed Mills
+			       August 1990
+
+    This sample shows a method to guarantee that an application will
+return to the full screen group that started it. Most applications do
+this by default, but applications based on dialog boxes or message
+boxes may not return.
+
+    The sample FULLSCRN just creates a dummy frame window so that the
+normal switching code is activated.

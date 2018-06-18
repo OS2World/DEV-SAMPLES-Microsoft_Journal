@@ -1,0 +1,21 @@
+# SCCSID: @(#)makefile -- makefile for huge.exe
+
+LIB             = c:\lib
+MODEL           = L
+WARNING         = 3
+CFLAGS          = /W$(WARNING) /A$(MODEL) /Lp /c /G2
+LFLAGS          = /nod
+LIBFILES        = os2.lib+$(MODEL)libcep.lib
+
+.c.obj:
+                $(CC) $(CFLAGS) $*.c
+
+.obj.exe:
+                link $(LFLAGS) $*.obj,$*.exe,\dev\nul,$(LIBFILES),\dev\nul;
+#                bind $*.exe $(LIB)\api.lib $(LIB)\os2.lib
+
+all:            huge.exe
+
+huge.obj:       huge.c makefile
+
+huge.exe:       huge.obj makefile

@@ -1,0 +1,21 @@
+#include "os2.h"
+#include "hello.h"
+
+POINTER ID_HELLO   hello.ico
+
+BITMAP 13 logo.bmp
+
+MENU ID_HELLO   PRELOAD
+BEGIN
+    SUBMENU  "Menu", 0x2000
+        BEGIN
+            MENUITEM "Create new action bar item",   IDM_NEWMENU,   MIS_TEXT
+            MENUITEM "Delete action bar item", IDM_DELPOPUP,  MIS_TEXT
+	    MENUITEM "Add Sys-menu item", ID_ADDTOSYSMENU, MIS_TEXT
+	    MENUITEM "Del Sys-menu item", ID_DELSYS, MIS_TEXT
+	    MENUITEM "Disabled item", ID_DISABLED, MIS_TEXT, MIA_DISABLED
+            MENUITEM "Toggle Help Bar", ID_TOGGLEHELP, MIS_TEXT
+
+	END
+    MENUITEM "F1=HELP", 50, MIS_HELP | MIS_BUTTONSEPARATOR
+END

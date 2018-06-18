@@ -1,0 +1,35 @@
+#include <os2.h>
+#include "base.h"
+
+MENU ID_RESOURCE
+  {
+  SUBMENU "~Test",         IDM_SUB1
+    {
+    MENUITEM "~Remove MinMax Buttons",     IDM_MENU1
+    }
+  SUBMENU "F1=~Help",            IDM_SUBHELP,  MIS_BUTTONSEPARATOR
+    {
+    MENUITEM "~Help",            IDM_HELP,     MIS_HELP
+    MENUITEM SEPARATOR
+    MENUITEM "~About PM Base",   IDM_ABOUT
+    }
+  }
+
+ ACCELTABLE ID_RESOURCE
+ {
+ VK_F2,  IDM_MENU1,   VIRTUALKEY
+ }
+
+ICON ID_RESOURCE base.ico
+
+DLGTEMPLATE IDD_ABOUT
+  {
+  DIALOG "", IDD_ABOUT, 32, 32, 200, 88,, FCF_DLGBORDER
+    {
+    CTEXT "PM Base Code"                        -1, 10, 64, 180,  8
+    ICON  ID_RESOURCE                            0, 8,  45, 0, 0
+    CTEXT "About Box"                           -1, 35, 40, 145,  8
+    CTEXT "Written by Eric Flo"                 -1, 10, 32, 180,  8
+    DEFPUSHBUTTON "OK"                      DID_OK, 80,  8,  40, 16, WS_GROUP
+    }
+  }

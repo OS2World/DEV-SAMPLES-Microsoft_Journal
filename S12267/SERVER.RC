@@ -1,0 +1,6 @@
+#include "pmwin.h"
+#include "server.h"
+
+
+
+POINTER  IDR_GENAPP server.ico

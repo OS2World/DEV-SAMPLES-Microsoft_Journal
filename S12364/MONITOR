@@ -1,0 +1,10 @@
+# Makefile for Keyboard Monitor
+
+OPT= -c -AL -G2 -Zi -Lp -Ox -Zp
+
+monitor.obj:   monitor.c monitor
+                cl $(OPT) monitor.c
+
+
+monitor.exe:   monitor.obj
+                link @monitor.lnk

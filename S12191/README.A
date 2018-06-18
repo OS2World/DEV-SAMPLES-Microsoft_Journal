@@ -1,0 +1,44 @@
+This is an example of using MS OS/2 queues from BASIC. In this 
+example, a single BASIC process (running in one OS/2 screen group) 
+creates a queue, writes information to the queue, and reads 
+information back from the queue. The example uses the following MS 
+OS/2 API calls:
+
+   DosCreateQueue
+   DosReadQueue
+   DosWriteQueue
+   DosQueryQueue
+   DosCloseQueue
+   DosPeekQueue
+   DosPurgeQueue
+   DosAllocShrSeg
+   DosGetShrSeg
+
+This information applies to Microsoft BASIC Compiler Versions 6.00 and
+6.00b for MS OS/2, and to Microsoft BASIC Professional Development 
+System (PDS) Version 7.00 for MS OS/2. (This information does not 
+apply to Microsoft QuickBASIC, which supports only the MS-DOS 
+operating system.)
+
+More Information:
+
+The following files make up this example:
+
+1. Q3.BAS - A program that creates/reads a Queue
+
+2. QUEUE.BI - An include file used by Q3.BAS
+
+3. UTIL.BAS - BASIC routines to read/write shared memory
+
+4. README.A - Text file describing how to compile, link, and run this 
+              example (as shown below).
+
+The compile and LINK instructions are as follows:
+
+1.  BC q3;
+
+2.  BC util /x;
+
+3.  LINK q3 util;
+
+Now you can run Q3.EXE.

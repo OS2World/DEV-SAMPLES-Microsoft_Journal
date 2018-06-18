@@ -1,0 +1,14 @@
+# makefile for bootdd.sys - Reboot device driver skeleton
+
+bootdd.obj: bootdd.asm reboot.c bootdd.def bootdd
+
+reboot.obj: reboot.c bootdd.asm bootdd.def bootdd
+
+.asm.obj:
+   masm /W2 /Mx /L $*;
+
+.c.obj:
+   cl /W3 /Lp /Fb $*.c
+
+bootdd.sys: bootdd.obj reboot.obj bootdd.def bootdd
+   link /map bootdd,bootdd.sys,bootdd,os2,bootdd.def;

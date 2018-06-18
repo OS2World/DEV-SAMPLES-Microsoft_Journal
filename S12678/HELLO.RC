@@ -1,0 +1,7 @@
+/*
+   HELLO resource file
+   Created by Microsoft Corp., 1988
+*/
+#include "hello.h"
+
+POINTER HELLOICON   hello.ico

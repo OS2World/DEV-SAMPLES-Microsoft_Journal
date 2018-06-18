@@ -1,0 +1,5 @@
+monitor.obj /CO
+monitor.exe /NOI
+
+/NOD:LLIBCE llibcep.lib
+monitor.def

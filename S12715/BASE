@@ -1,0 +1,16 @@
+#--------------------
+# BASE make file
+#--------------------
+
+#include "base.h"
+
+base.res : base.rc base.h
+     rc -r base.rc
+
+base.obj : base.c base.h
+     cl -c -G2s -B1 c1l.exe -Zi -W3 base.c
+
+base.exe : base.obj base.def
+     link /CO/map base, /align:16, , os2 llibce, base
+     rc base.res
+     mapsym base.map

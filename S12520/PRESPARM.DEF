@@ -1,0 +1,13 @@
+;-------------------------------------
+; PresParm.DEF module definition file
+;-------------------------------------
+
+NAME	       PresParm  WINDOWAPI
+
+DESCRIPTION    'Demonstation of Como boxes and  Presentation Parameters'
+PROTMODE
+HEAPSIZE       1024
+STACKSIZE      8192
+EXPORTS        ClientWndProc
+	       GetPresParamsDlgProc
+	       AboutboxDlgProc

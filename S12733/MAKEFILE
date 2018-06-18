@@ -1,0 +1,29 @@
+cp=cl -c -W3 -AL -G2s -Od -Zpeid
+
+.c.obj:
+    $(cp) $*.c
+
+.asm.obj:
+    masm $*.asm;
+
+.rc.res:
+    rc -r $*.rc
+
+all: hello.exe
+
+hello.obj: hello.c hello.h
+
+command.obj: command.c hello.h
+
+common.obj: common.c hello.h
+
+paint.obj: paint.c hello.h
+
+wndproc.obj: wndproc.c hello.h
+
+hello.res: hello.rc hello.ico hello.h
+
+hello.exe: hello.obj wndproc.obj paint.obj command.obj common.obj hello.res hello.lnk hello.def
+    link @hello.lnk
+    rc hello.res
+    mapsym hello

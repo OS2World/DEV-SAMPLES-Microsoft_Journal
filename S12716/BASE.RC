@@ -1,0 +1,7 @@
+/*---------------------------------
+   BASE.RC resource script file
+  ---------------------------------*/
+
+#include "base.h"
+
+BITMAP IDB_HELLO base.bmp

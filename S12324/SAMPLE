@@ -1,0 +1,10 @@
+
+cp=cl -d -c -AM -G2sw -Os -Zpei -W3
+
+.c.obj:
+    $(cp) $*.c
+
+sample.obj: sample.c
+
+sample.exe: sample.obj
+    link sample/CO/MAP,,,os2;

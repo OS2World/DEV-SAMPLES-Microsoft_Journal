@@ -1,0 +1,11 @@
+				NOCLOSE
+
+				Ed Mills
+			       August 1990
+
+    This sample shows how to make an unkillable 1.21 application similar
+to the way the Print Manager is implemented. This is useful for writing
+controling shells, etc.
+
+    This is guaranteed to work in OS/2 1.21, but it uses undocumented
+features which may change in future versions.
