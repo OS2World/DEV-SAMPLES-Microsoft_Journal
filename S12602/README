@@ -1,0 +1,71 @@
+The included archive contains a sample app that will demonstrate how
+to handle various DDE transactions with Microsoft Excel.
+
+
+It currently supports the following transactions:
+
+1.  Execute Excel commands from Welcome1
+
+    First start a copy of Excel.
+
+    Select the Connect menu in Welcome1 and enter
+
+    Excel             -  for the app name
+    System            -  for the topic
+
+    Then select Execute and RUN menu item and enter
+    [NEW()]           - or some other excel command
+
+    [SELECT("R1C1:R5C1,R5C5")]   - an example of a selection
+                                   command in the current document
+
+2.  Spawn a copy of Excel and detect when Excel is ready to accept DDE
+    transactions.  HACK ALERT, see source.
+
+3.  Handle REQUEST() macro commands from Excel.  See source and macro2.xlm
+    sample macro sheet.
+
+4.  Handle EXECUTE() macro commands from Excel.  See source and macro2.xlm
+    sample macro sheet.
+
+
+
+
+NOTE.  The PMSHL.H file shipped with the 1.2 Toolkit and C 6.0 has a
+bug in it that makes it impossible to use use the PSWBLOCK structure.
+To correct this problem remove the following marked line from PMSHL.H
+
+/****************************************************************************/
+/*									    */
+/*  NOTE: string information is concatanated after the PROGDETAILS field    */
+/*	  structure so you need to allocate storage greater than	    */
+/*	  sizeof(PROGDETAILS) to query programs 			    */
+/*									    */
+/*  PrfQueryDefinition recomended usage:				    */
+/*									    */
+/*  bufferlen = PrfQueryDefinition(Hini, Hprog, (PPROGDETAILS) NULL, 0)     */
+/*									    */
+/*  Alocate buffer of bufferlen bytes					    */
+/*  set Length field (0 will be supported)				    */
+/*									    */
+/*  (PPROGDETAILS)pBuffer->Length=sizeof(PPROGDETAILS)			    */
+/*									    */
+/*  len = PrfQueryDefinition(Hini, Hprog, (PPROGDETAILS)pBuffer, bufferlen) */
+/*									    */
+/****************************************************************************/
+
+BOOL	 APIENTRY PrfRemoveProgram(HINI hini, HPROGRAM hprog);
+ULONG	 APIENTRY PrfQueryProgramHandle(HINI hini, PSZ pszExe,
+					PHPROGARRAY phprogArray,
+					ULONG cchBufferMax, PULONG pulCount);
+HPROGRAM APIENTRY PrfCreateGroup(HINI hini, PSZ pszTitle, UCHAR chVisibility);
+BOOL	 APIENTRY PrfDestroyGroup(HINI hini, HPROGRAM hprogGroup);
+PROGCATEGORY APIENTRY PrfQueryProgramCategory(HINI hini, PSZ pszExe);
+
+#endif /* INCL_WINPROGRAMLIST */
+
+#if ((defined(INCL_WINSWITCHLIST) || !defined(INCL_NOCOMMON)) && !defined(INCL_WINSWITCHLIST_INCLUDED))
+------->>>>>>>  // #define INCL_WINSWITCHLIST_INCLUDED   <<<<< ------------------------------------------------  remove this line     ***************
+
+typedef LHANDLE HSWITCH;	/* hsw */
+typedef HSWITCH FAR *PHSWITCH;

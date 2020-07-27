@@ -1,0 +1,436 @@
+How to Do Serial Communications in OS/2 COBOL Program       
+
+Summary:
+
+Microsoft COBOL versions 3.00 and 3.00a protected mode programs can
+perform serial communications by calling the following OS/2 API
+functions:
+
+   Function        Use
+   --------        ---
+
+   DosOpen()       Opens a file or device
+   DosDevIOCtl()   Issues device specific commands (set baud rate, etc.)
+   DosRead()       Reads from a file or device
+   DosWrite()      Writes to a file or device
+   DosClose()      Closes a file or device
+
+This information applies to Microsoft COBOL Compiler versions 3.00 and
+3.00a for MS OS/2.
+
+More Information:
+
+Microsoft COBOL versions 3.00 and 3.00a can call OS/2 API functions
+directly with the CALL statement by preceding the name of the function
+with a double underscore (__) and linking with the PCOBOL.LIB and
+DOSCALLS.LIB libraries. Because API functions use a calling convention
+that is the reverse of COBOL's, any parameters must be passed in the
+reverse order.
+
+The sample program below, TERMNAL.CBL, demonstrates how a protected
+mode COBOL program can call the API functions mentioned above to
+perform serial communications. When run on two computers connected
+with a null-modem cable, TERMNAL.CBL will take any keyboard input and
+send it to the other computer via the serial port. It will also read
+any input from the serial port and display it on the screen.
+
+TERMNAL.CBL calls five other programs: INITCOM.CBL, COMSIZE.CBL,
+READCOM.CBL, WRITECOM.CBL and CLOSECOM.CBL (shown further below).
+Compile each of these programs (including TERMNAL.CBL) with the
+following command:
+
+  pcobol <program>;
+
+When all the programs have been compiled successfully, enter the
+following LINK command (enter the second line after the linker prompts
+for .OBJ files):
+
+  link /nop
+  termnal initcom comsize readcom writecom closecom,,,pcobol doscalls;
+
+IMPORTANT NOTE: While TERMNAL.EXE can be made into a bound application
+using the BIND.EXE utility, an error may be generated when the program
+(run in OS/2 real mode) attempts to set the baud rate, data bits,
+parity, or stop bits. This is because the DOS driver for the device
+may not support those functions. In that case, direct output to the
+serial port would be necessary (bypassing the operating system),
+instead of treating the port as a file.
+
+For more information on calling OS/2 API functions from COBOL, see
+the file OS2API.DOC included with COBOL 3.00a.
+
+For more information on the API functions mentioned above, see Pages
+506, 510, 537-539, 553-554, 572, and 621-622 of "Advanced OS/2
+Programming" by Ray Duncan (Microsoft Press, 1989).
+
+Code Example (in five separate source files)
+------------
+
+TERMNAL.CBL
+-----------
+
+      $SET ANS85
+
+      * "Termnal" had to be used instead of "Terminal" because the
+      * latter is a reserved word. It is better abbreviated than
+      * misspelled (such as "Termenal").
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID.   Termnal.
+
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+
+      *   Name of device to open, terminated with an ASCII 0.
+      *   You can specify COM1 or COM2 if port is available.
+       01 Port.
+          05 ComName     PIC X(4)        VALUE "COM1".
+          05 ASCIIZ      PIC X           VALUE X"00".
+
+      *   Desired baud rate.
+       01 BaudRate       PIC 9(4) COMP-5 VALUE 300.
+      *   Specifies to write 1 character at a time.
+       01 BytesToWrite   PIC 9(4) COMP-5 VALUE 1.
+      *   Receives how many characters were actually written.
+       01 BytesWritten   PIC 9(4) COMP-5.
+      *   Receives how many characters were actually read.
+       01 BytesRead      PIC 9(4) COMP-5.
+      *   Receives how many characters are waiting to be read.
+       01 CharsWaiting   PIC 9(4) COMP-5.
+      *   Handle to the serial device.
+       01 Handle         PIC 9(4) COMP-5.
+      *   Used to check if key is waiting to be read.
+       01 KeyWaiting     PIC 99   COMP-X.
+      *   Contains the character to send out the serial port.
+       01 Buffer         PIC X.
+
+      *   Line characteristics (8 data bits, no parity, 1 stop bit).
+       01 LineSpecs.
+          05 DataBits    PIC 99   COMP-5 VALUE 8.
+          05 Parity      PIC 99   COMP-5 VALUE 0.
+          05 StopBits    PIC 99   COMP-5 VALUE 0.
+          05 Unused      PIC 99   COMP-5.
+
+       PROCEDURE DIVISION.
+
+      *    Clear the screen and initialize the serial port.
+           CALL X"E4".
+           CALL "InitCom" USING Port, Handle, BaudRate, LineSpecs.
+
+      *    Loop until the escape key (ASCII 27) is pressed.
+           PERFORM UNTIL Buffer = X"1B"
+
+      *       Check if key is waiting to be read.
+              MOVE 0 TO KeyWaiting
+              CALL X"D9" USING KeyWaiting
+
+      *       If key read in, send it out the serial port.
+              IF KeyWaiting NOT = 0 THEN
+                 CALL X"83" USING Buffer
+                 CALL "WriteCom" USING Handle, BytesToWrite,
+                                       BytesWritten, Buffer
+              END-IF
+
+      *       Get number of characters waiting in serial buffer.
+              CALL "ComSize" USING Handle, CharsWaiting
+
+              IF CharsWaiting > 0 THEN
+
+      *          Read one character at a time.
+                 MOVE 1 TO CharsWaiting
+                 CALL "ReadCom" USING Handle, CharsWaiting, BytesRead,
+                                      Buffer
+
+      *          If a carriage return was read in, advance a line. If
+      *          not, display the character on the same line. If it's
+      *          a backspace, erase the previous character and
+      *          reposition the cursor to that spot.
+                 IF Buffer = X"0D" THEN
+                    DISPLAY Buffer
+                 ELSE
+                    DISPLAY Buffer WITH NO ADVANCING
+                    IF Buffer = X"08" THEN
+                       DISPLAY " " WITH NO ADVANCING
+                       DISPLAY Buffer WITH NO ADVANCING
+                    END-IF
+                 END-IF
+
+              END-IF
+
+           END-PERFORM.
+
+      *    Close the port and end the program.
+           CALL "CloseCom" USING Handle.
+           STOP RUN.
+
+INITCOM.CBL
+-----------
+
+      $SET ANS85
+      $SET OSVS
+
+      * InitCom initializes the serial port. It opens the device (via
+      * DosOpen) and sets the desired baud rate, data bits, parity,
+      * and stop bits (via DosDevIOCtl).
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID.   InitCom IS INITIAL.
+
+       DATA DIVISION.
+
+       WORKING-STORAGE SECTION.
+
+      *   Parameters of DosOpen function.
+
+       01 Reserved      PIC 9(8) COMP-5 VALUE 0.
+      *   Specifies read/write mode with no sharing.
+       01 OpenMode      PIC 9(4) COMP-5 VALUE 18.
+      *   Specifies to open device if it exists, fail if it doesn't.
+       01 OpenFlag      PIC 9(4) COMP-5 VALUE 1.
+      *   Serial device has no special file attributes.
+       01 Attribute     PIC 9(4) COMP-5 VALUE 0.
+      *   Specifies no initial file allocation for device.
+       01 Allocation    PIC 9(8) COMP-5 VALUE 0.
+      *   Receives 1 if device found and opened successfully.
+       01 Action        PIC 9(4) COMP-5.
+
+      *   Parameters of DosDevIOCtl function.
+
+      *   Specifies serial category of operations.
+       01 Category      PIC 9(4) COMP-5 VALUE 1.
+      *   Specifies function to set baud rate.
+       01 Function      PIC 9(4) COMP-5 VALUE 65.
+      *   Functions 65 and 66 data buffer format is a null pointer.
+       01 NullSegment   PIC 9(4) COMP-5 VALUE 0.
+       01 NullOffset    PIC 9(4) COMP-5 VALUE 0.
+
+       LINKAGE SECTION.
+
+      *   Name of device to open (COMn, where n is 1-4).
+       01 Port          PIC X(5).
+      *   Handle to refer to device in later operations.
+       01 Handle        PIC 9(4) COMP-5.
+      *   Desired baud rate.
+       01 BaudRate      PIC 9(4) COMP-5.
+
+      *   Desired line characteristics.
+       01 LineSpecs.
+          05 DataBits   PIC 99   COMP-5.
+          05 Parity     PIC 99   COMP-5.
+          05 StopBits   PIC 99   COMP-5.
+          05 Unused     PIC 99   COMP-5.
+
+       PROCEDURE DIVISION USING Port, Handle, BaudRate, LineSpecs.
+
+      *    Open the device.
+           CALL "__DosOpen" USING BY VALUE     Reserved,
+                                  BY VALUE     OpenMode,
+                                  BY VALUE     OpenFlag,
+                                  BY VALUE     Attribute,
+                                  BY VALUE     Allocation,
+                                  BY REFERENCE Action,
+                                  BY REFERENCE Handle,
+                                  BY REFERENCE Port.
+
+      *    If no error occurred, set the baud rate.
+           IF RETURN-CODE = 0 THEN
+              CALL "__DosDevIOCtl" USING BY VALUE     Handle,
+                                         BY VALUE     Category,
+                                         BY VALUE     Function,
+                                         BY REFERENCE BaudRate,
+                                         BY VALUE     NullSegment,
+                                         BY VALUE     NullOffset
+           ELSE
+              CALL X"E5"
+              DISPLAY "ERROR opening port - " RETURN-CODE
+              STOP RUN
+           END-IF.
+
+      *    Specifies function to set line characteristics.
+           MOVE 66 TO Function.
+
+      *    If no error occurred, set line characteristics.
+           IF RETURN-CODE = 0 THEN
+              CALL "__DosDevIOCtl" USING BY VALUE     Handle,
+                                         BY VALUE     Category,
+                                         BY VALUE     Function,
+                                         BY REFERENCE LineSpecs,
+                                         BY VALUE     NullSegment,
+                                         BY VALUE     NullOffset
+           ELSE
+              CALL X"E5"
+              DISPLAY "ERROR setting baud rate - " RETURN-CODE
+              STOP RUN
+           END-IF.
+
+      *    Report if error occurred setting line characteristics.
+           IF RETURN-CODE NOT = 0 THEN
+              CALL X"E5"
+              DISPLAY "ERROR setting line specs - " RETURN-CODE
+              STOP RUN
+           END-IF.
+
+           EXIT PROGRAM.
+
+COMSIZE.CBL
+-----------
+
+      $SET ANS85
+      $SET OSVS
+
+      * ComSize obtains the number of bytes waiting to be read from
+      * the serial port (via DosDevIOCtl).
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID.   ComSize IS INITIAL.
+
+       DATA DIVISION.
+
+       WORKING-STORAGE SECTION.
+
+      *   Specifies serial category of operations.
+       01 Category          PIC 9(4) COMP-5 VALUE 1.
+      *   Specifies function to get number of characters in queue.
+       01 Function          PIC 9(4) COMP-5 VALUE 104.
+      *   Function 104 parameter buffer format is a null pointer.
+       01 NullSegment       PIC 9(4) COMP-5 VALUE 0.
+       01 NullOffset        PIC 9(4) COMP-5 VALUE 0.
+
+      *   Receives number of characters in queue and size of queue.
+       01 QueueInfo.
+          05 CharsInQueue   PIC 9(4) COMP-5.
+          05 QueueSize      PIC 9(4) COMP-5.
+
+       LINKAGE SECTION.
+
+      *   Handle to the serial device.
+       01 Handle            PIC 9(4) COMP-5.
+      *   Receives number of characters waiting to be read.
+       01 CharsWaiting      PIC 9(4) COMP-5.
+
+       PROCEDURE DIVISION USING Handle, CharsWaiting.
+
+           CALL "__DosDevIOCtl" USING BY VALUE     Handle,
+                                      BY VALUE     Category,
+                                      BY VALUE     Function,
+                                      BY VALUE     NullSegment,
+                                      BY VALUE     NullOffset,
+                                      BY REFERENCE QueueInfo.
+
+      *    Report if error occurred.
+           IF RETURN-CODE NOT = 0 THEN
+              CALL X"E5"
+              DISPLAY "ERROR getting port size - " RETURN-CODE
+           END-IF.
+
+           MOVE CharsInQueue TO CharsWaiting.
+           EXIT PROGRAM.
+
+READCOM.CBL
+-----------
+
+      $SET ANS85
+      $SET OSVS
+
+      * ReadCom attempts to read the desired number of bytes from the
+      * serial port (via DosRead). It returns the number of bytes
+      * actually read.
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID.   ReadCom.
+
+       DATA DIVISION.
+       LINKAGE SECTION.
+
+      *   Handle to the serial device.
+       01 Handle        PIC 9(4)   COMP-5.
+      *   Number of characters desired to be read.
+       01 BytesToRead   PIC 9(4)   COMP-5.
+      *   Actual number of characters read.
+       01 BytesRead     PIC 9(4)   COMP-5.
+      *   Receives the characters read, assumes 512 byte buffer.
+       01 Buffer        PIC X(512).
+
+       PROCEDURE DIVISION USING Handle, BytesToRead, BytesRead,
+                                Buffer.
+
+           CALL "__DosRead" USING BY REFERENCE BytesRead,
+                                  BY VALUE     BytesToRead,
+                                  BY REFERENCE Buffer,
+                                  BY VALUE     Handle.
+
+      *    Report if error occurred.
+           IF RETURN-CODE NOT = 0 THEN
+              CALL X"E5"
+              DISPLAY "ERROR reading from port - " RETURN-CODE
+              STOP RUN
+           END-IF.
+
+           EXIT PROGRAM.
+
+WRITECOM.CBL
+------------
+
+      $SET ANS85
+      $SET OSVS
+
+      * WriteCom attempts to write the desired amount of bytes to the
+      * serial port (via DosWrite). It returns the number of bytes
+      * actually written.
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID.   WriteCom.
+
+       DATA DIVISION.
+       LINKAGE SECTION.
+
+      *   Handle to the serial device.
+       01 Handle         PIC 9(4)   COMP-5.
+      *   Number of characters to write.
+       01 BytesToWrite   PIC 9(4)   COMP-5.
+      *   Receives number of characters actually written.
+       01 BytesWritten   PIC 9(4)   COMP-5.
+      *   Contains the characters to write, assumes 512 byte buffer.
+       01 TheData        PIC X(512).
+
+       PROCEDURE DIVISION USING Handle, BytesToWrite, BytesWritten,
+                                TheData.
+
+           CALL "__DosWrite" USING BY REFERENCE BytesWritten,
+                                   BY VALUE     BytesToWrite,
+                                   BY REFERENCE TheData,
+                                   BY VALUE     Handle.
+
+      *    Report if error occurred.
+           IF RETURN-CODE NOT = 0 THEN
+              CALL X"E5"
+              DISPLAY "ERROR writing to port - " RETURN-CODE
+              STOP RUN
+           END-IF.
+
+           EXIT PROGRAM.
+
+CLOSECOM.CBL
+------------
+
+      $SET ANS85
+      $SET OSVS
+
+      * CloseCom closes the serial port, relinquishing the handle and
+      * deallocating buffer.
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID.   CloseCom.
+
+       DATA DIVISION.
+       LINKAGE SECTION.
+
+      *   Handle to the serial device.
+       01 Handle   PIC 9(4) COMP-5.
+
+       PROCEDURE DIVISION USING Handle.
+
+           CALL "__DosClose" USING BY VALUE Handle.
+
+      *    Report if error occurred.
+           IF RETURN-CODE NOT = 0 THEN
+              CALL X"E5"
+              DISPLAY "ERROR closing port - " RETURN-CODE
+              STOP RUN
+           END-IF.
+
+           EXIT PROGRAM.

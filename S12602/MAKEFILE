@@ -1,0 +1,15 @@
+#--------------------
+# WELCOME1 make file
+#--------------------
+
+all: welcome1.exe
+
+welcome1.obj : welcome1.c welcome1.h
+     cl -c -AL -G2sw -W3 -Od -Zi welcome1.c
+
+welcome1.res : welcome1.rc getvalue.dlg getvalue.h
+     rc -r welcome1.rc
+
+welcome1.exe : welcome1.obj welcome1.def welcome1.res
+     link /CO welcome1, /align:16, NUL/NOD/NOE, llibcep os2, welcome1
+     rc welcome1.res

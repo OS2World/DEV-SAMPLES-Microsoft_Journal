@@ -1,0 +1,11 @@
+# SCCSID @(#)makefile -- sample OS/2 msg files foo.msg and fooh.msg
+
+APP=foo
+
+$(APP):      $(APP).msg $(APP)h.msg
+
+$(APP).msg:  $(APP).txt 
+             mkmsgf $(APP).txt $(APP).msg
+
+$(APP)h.msg: $(APP)h.txt 
+             mkmsgf $(APP)h.txt $(APP)h.msg

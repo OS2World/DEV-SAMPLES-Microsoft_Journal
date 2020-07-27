@@ -1,0 +1,42 @@
+/*----------------------------------
+  WELCOME1.RC resource script file
+  ----------------------------------*/
+
+#include <os2.h>
+#include "welcome1.h"
+
+MENU ID_RESOURCE
+     {
+     SUBMENU "~Options", IDM_OPTIONS
+        {
+        MENUITEM "~Quiet", IDM_QUIET
+        }
+
+     MENUITEM "~Connect",	    IDM_CREATE
+     SUBMENU "Disconnect",        IDM_END
+	  {
+	  MENUITEM "Server",	      IDM_ENDSERVER
+	  MENUITEM "Client",	      IDM_ENDCLIENT
+	  }
+
+     SUBMENU  "~Write", 	    IDM_WRITE
+	  {
+	  MENUITEM "POKE",	    IDM_COMPOSE
+	  }
+     SUBMENU  "~Read",		    IDM_READ
+	  {
+	  MENUITEM "~PEEK",	    IDM_NUMBER
+	  }
+     SUBMENU "~Execute",	    IDM_EXECUTE
+	  {
+	  MENUITEM "~Run",	    IDM_RUN
+	  }
+     SUBMENU "~Spawn",              IDM_SPAWN
+        {
+        MENUITEM "Excel",           IDM_EXCEL
+        }
+
+     }
+
+
+RCINCLUDE GETVALUE.DLG

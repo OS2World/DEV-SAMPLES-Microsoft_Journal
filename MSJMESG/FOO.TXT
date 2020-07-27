@@ -1,0 +1,8 @@
+FOO
+FOO0000E: This is the FOO app error message 0000.
+FOO0001E: This is the FOO app error message 0001.
+FOO0002E: This is the FOO app error message 0002.
+FOO0003E: This is the FOO app error message 0003.
+FOO0004E: This is the FOO app error message 0004.
+FOO0005E: This is the FOO app error message 0005.
+

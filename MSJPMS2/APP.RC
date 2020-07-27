@@ -1,0 +1,42 @@
+#include <os2.h>
+#include "APP.h"
+
+POINTER ID_APP     APP.ico
+
+STRINGTABLE
+BEGIN
+    IDSNAME,	"APP"
+    IDSKIDNAME,    "KID"
+END
+
+DLGTEMPLATE IDD_ABOUT LOADONCALL MOVEABLE DISCARDABLE 
+BEGIN
+    DIALOG "", 0, 24, 24, 172, 96, FS_DLGBORDER | WS_GROUP | 
+                WS_VISIBLE
+    BEGIN
+        CONTROL "OK", DID_OK, 76, 5, 24, 15, WC_BUTTON, BS_PUSHBUTTON | 
+                BS_DEFAULT | WS_TABSTOP | WS_VISIBLE
+        CONTROL "PM Version 1.00 (Alpha)", -1, 7, 58, 160, 10, WC_STATIC, 
+                SS_TEXT | DT_CENTER | DT_TOP | WS_VISIBLE
+        CONTROL "APP Skeleton", -1, 6, 71, 160, 8, WC_STATIC, SS_TEXT |
+                DT_CENTER | DT_TOP | WS_VISIBLE
+        CONTROL ID_APP, ID_APP, 7, 44, 16, 28, WC_STATIC, SS_ICON | DT_LEFT |
+                DT_TOP | WS_VISIBLE
+    END
+END
+
+
+MENU ID_APP PRELOAD
+begin
+    SUBMENU "~Options", -1
+       begin
+	  MENUITEM "Add ~Strings...\t^S",  IDADDSTRINGS,    MIS_TEXT
+          MENUITEM "~About..."   , IDABOUT,   MIS_TEXT
+       end
+end
+
+ACCELTABLE ID_APP
+BEGIN
+   "^s", IDADDSTRINGS
+   "^e", IDENTER
+END

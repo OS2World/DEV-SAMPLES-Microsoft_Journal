@@ -1,0 +1,514 @@
+General OS/2 Information Sources
+
+Summary:
+
+This article contains a list of sources of information for OS/2 users
+and developers. It includes the following sections:
+
+   Usenet comp.os.os2 Newsgroup
+   OS/2 Discussion Forum Internet Digest
+   ISO8859 Internet Mailing List
+   OS/2 Application Guide
+   Microsoft OnLine
+   Microsoft University
+   IBM Developer Assistance Program
+   Publications
+   Information Systems
+   Bulletin Boards
+   Anonymous FTP Archive Sites
+   Books and Reference Manuals
+   Microsoft and IBM Toolkits
+
+More Information:
+
+Usenet comp.os.os2 Newsgroup
+----------------------------
+
+The unmoderated Usenet newsgroup comp.os.os2 is a general forum for
+all OS/2-related questions on the OS/2 operating system. Messages in
+this newsgroup are NOT gatewayed into the "OS/2 Discussion Forum" OS/2
+internet digest.
+
+OS/2 Discussion Forum Internet Digest
+-------------------------------------
+
+The "OS/2 Discussion Forum" is an internet OS/2-specific digest that
+is unrelated (i.e., not gatewayed) to the OS/2 comp.os.os2 newsgroup.
+This moderated digest originates from the K.U.Leuven (Catholic
+University of Louvain) in Belgium, and currently has approximately 450
+subscribers and 14 local redistribution aliases. There is no charge to
+receive the digest or access the files it makes available. The digest
+is based on a list server. The domain and bitnet paths to the digest's
+list server and moderator are as follows:
+
+   listserv:    listserv@blekul11.bitnet      (bitnet)
+                listserv@cc1.kuleuven.ac.be   (domain)
+   submissions: os-2@blekul11.bitnet          (bitnet)
+                os-2@cc1.kuleuven.ac.be       (domain)
+   moderator:   tewos-2@blekul14.bitnet       (bitnet)
+                tewos-2@liris.kuleuven.ac.be  (domain)
+
+If you have BITNET access, you can interactively access the list
+server using the standard listserv virtual machine commands (such as
+the VM TELL command). If you are not on BITNET, you can use email to
+talk to it, with the listserv command as the message body. To obtain
+back issues from the listserv at blekul11 (see addresses above), use
+the following message:
+
+   get os-2 logYYMM
+
+where YYMM is the name of the log (for example, "get os-2 log8905").
+Valid values of YYMM currently are 8905, 8906, 8907, 8908, 8909, and
+8910. To subscribe to the digest, use the following message
+
+   subscribe os-2 YOUR FULL NAME
+
+where YOUR FULL NAME is your full name (for example, "sub os-2 John
+Doe"). To get a current list of the files available in the OS/2 file
+archives, use the following message:
+
+   index os-2
+
+To get a file list with additional comments, use the following
+message:
+
+   get os-2 filelist
+
+To retrieve a file, use the following message:
+
+   get os-2 NAME EXTENSION
+
+where NAME is the filename and EXTENSION is the file extension. For
+example, use "get os-2 arc2 exe" to get the file ARC2.EXE; note that
+there is no period between the filename and the file extension. To get
+a list of subscribers, use the following message:
+
+   review os-2
+
+The policy for submitting new OS/2 files is that the author should
+approve being placed on the digest's list server. For more information
+on this subject, contact the digest moderator. To get general listserv
+help, use the following message:
+
+   help
+
+ISO8859 Internet Mailing List
+-----------------------------
+
+"ISO8859" is an internet listserv-based mailing list that specializes
+in working with character sets; its subtitle is "ASCII/EBCDIC
+Character Set Related Issues." Although its name implies that this is
+only for the ISO 8859/[1-8] character sets, there is a large amount of
+discussion on the ASCII and EBCDIC codepages of MS-DOS, OS/2, and
+other IBM platforms. Thus, although this mailing list is not OS/2
+specific, it is beneficial to OS/2 developers who write applications
+that support multiple codepages.
+
+Once you have used one listserv, the rest basically work in the same
+manner. The listserv instructions listed above for the OS/2 Discussion
+Forum also apply to this listserv-based mailing list, except that the
+list name is ISO8859 rather than OS/2. The list is based on the
+listserv at JHUVM. Thus, the addresses for the listserver are as
+follows:
+
+   listserv:     listserv.jhuvm.bitnet (bitnet)
+   submissions:  iso8859@.jhuvm.bitnet (bitnet)
+
+OS/2 Application Guide
+----------------------
+
+IBM and Microsoft produce the "OS/2 Application Guide," which is
+distributed free of charge from IBM. This 5.5 x 8.5 x 1 inch paperback
+lists hundreds of OS/2 applications that are available (or are
+scheduled to be available). This guide provides free advertising for
+developers, and a good collection of information for consumers. To
+obtain a copy of the "OS/2 Application Guide," call (800) 426-2468,
+extension 120.
+
+An ASCII copy of this archive is available in the Microsoft OnLine
+Software/Data Library in a file named OS2APPS. This file is also on
+CompuServe and other information systems. OS2APPS can be found in the
+Software/Data Library by searching on the keyword OS2APPS, the Q
+number of this article, or S12020. OS2APPS was archived using the
+PKware file-compression utility.
+
+A form of this application guide is available as an on-line database
+from the IBM National Support Center BBS (Bulletin Board Service) in
+Atlanta, Georgia; the data line is (404) 988-2913. You can scan or
+search this database, which has products listed by category as well as
+alphabetically, and cross-referenced by company. The "OS/2 Application
+Guide" is also available on-line on another IBM BBS, with the data
+line (404) 988-2790.
+
+According to the IBM Personal Systems Developer publication,
+developers that want to place their product in this guide should call
+IBM at (407) 982-9614 and request an OS/2 application form. According
+to the IBM National Support Center BBS, developers that want to
+request an enrollment form to place a software listing in the "OS/2
+Compatibility Guide" on-line database should write to the following
+address:
+
+   Ms. Mildred N. Sanderson
+   IBM Corporation - 1709
+   P.O. Box 1328
+   Boca Raton, FL.
+   33429 - 1328
+   USA
+
+According to the title page of the "OS/2 Application Guide," to apply
+for inclusion in the OS/2 application database (from which the "OS/2
+Application Guide" is derived), submit a written request to the
+following address:
+
+   IBM Corporation
+   AG-ZIP 4607
+   P.O. Box 1328
+   Boca Raton, FL 33429-1328
+
+
+Microsoft OnLine
+----------------
+
+The Microsoft OnLine support system is a fee support service that
+provides developer support for OS/2 (in addition to providing support
+for other environments and products). Microsoft OnLine contains a very
+large database of information for OS/2 developers. There are also many
+sample applications and updated versions of some OS/2 system files
+(new video drivers, etc.). For more information on Microsoft OnLine,
+call (800) 443-4672.
+
+
+Microsoft University
+--------------------
+
+Microsoft University (MU) is a training center that offers courses on
+OS/2 for users and developers. There are OS/2 support, base (non-PM)
+programming, PM programming, device driver programming, SQL Server,
+and LAN Manager courses (in addition to Windows and other non-OS/2
+courses). Their main branch is in Bellevue, Washington, but there are
+other sites in Boston, Massachusetts and Washington, D.C.
+
+Special arrangements can be made to hold seminars at your company. In
+addition, courses are licensed by other companies (such as Intel). For
+a course catalog or more information, contact the Microsoft University
+Registrar at (206) 828-1507, extension 1000. Their mailing address is
+as follows:
+
+   Microsoft University
+   One Microsoft Way
+   Redmond, WA 98052-6399
+   USA
+
+IBM Developer Assistance Program
+--------------------------------
+
+The IBM Developer Assistance Program offers on-line technical support
+with IBM via IBMLink. It includes a free subscription to the quarterly
+IBM Personal Systems Developer technical publication, includes
+hardware rebates and discounts on IBM software, and allows
+participation in IBM-sponsored technical seminars.
+
+To qualify for this program, you must be a software developer working
+on products for commercial release. The specific qualifications are
+that you are developing products that support IBM OS/2, your company
+is a US company or the subsidiary of a non-US company, and your
+company is currently marketing your products.
+
+To request an application form, call (407) 982-6178 or write to IBM at
+the following address:
+
+   IBM Corporation
+   Developer Support
+   Internal zip 4605
+   P.O. Box 1328
+   Boca Raton, FL 33429-1328
+   USA
+
+
+Publications
+------------
+
+In addition to general computer magazines, which often contain
+discussions on OS/2, the following publications periodically contain
+articles on OS/2:
+
+   Computer Language
+   Dr. Dobb's Journal
+   PC Magazine
+   MIPS
+   PC Tech Journal (now out of print)
+   Computer Systems News
+   InfoWorld
+   PC Week
+
+There are other magazines that specialize more in OS/2 related topics.
+These magazines are as follows:
+
+1. Microsoft Systems Journal
+
+   The "Microsoft Systems Journal" (MSJ) has many OS/2-related
+   articles. For general information on MSJ, call (614) 382-3322. To
+   subscribe, call (800) 669-1002. Their mailing address is as
+   follows:
+
+      Circulation Department
+      Microsoft Systems Journal
+      P.O. Box 1903
+      Marion, OH 44305
+      USA
+
+   MSJ is also available on microfilm, and can be obtained from the
+   following address:
+
+      University Microfilms, Inc.
+      300 North Zeeb Road
+      Ann Arbor, MI 48106
+      USA
+
+   The program listings from MSJ articles are available on CompuServe,
+   Microsoft OnLine, GEnie, and the following bulletin boards:
+
+      RamNet BBS:     (212) 889-6438
+      Channel 1 BBS:  (617) 354-8873
+      ComOne BBS:     (415) 284-9151
+
+   If you are a sysop interested in maintaining MSJ files, you can
+   contact the MSJ office.
+
+2. IBM Personal Systems Journal
+
+   The "IBM Personal Systems Journal" is a monthly publication that
+   provides information on IBM software and hardware, mostly the PS/2
+   line and OS/2. To subscribe, contact your local IBM Representative
+   and use an IBM System Library Subscription Service (SLSS) form; you
+   should specify form number GBOF-1229. Correspondence to this
+   journal should be sent to the following address:
+
+      Editor, IBM Personal Systems Journal
+      IBM Corporation
+      Internal zip 40-C2-02
+      One East Kirkwood Blvd.
+      Roanoke, TX 76299-0015
+      USA
+
+3. IBM Personal Systems Developer
+
+   The "IBM Personal Systems Developer" is a quarterly publication
+   distributed by IBM and targeted to developers of IBM platforms;
+   currently this publication is mostly for OS/2 developers. The
+   publication is a part of the IBM Developer Assistance Program.
+
+4. IBM PC and PS/2 Seminar Proceedings
+
+   The seminar proceedings periodicals from IBM, "IBM Personal
+   Computer Seminar Proceedings" (before the PC/AT was introduced) and
+   "IBM Personal System/2 Seminar Proceedings" (after the PS/2 was
+   introduced) contain useful information on IBM hardware and
+   operating system level software such as OS/2 and MS-DOS. The
+   articles often consist of updates to IBM technical reference
+   manuals. Their mailing address is as follows:
+
+      IBM Corporation
+      Editor, IBM PS/2 Seminar Proceedings
+      Internal Zip 4629
+      P.O. 1328
+      Boca Raton, FL 33432
+      USA
+
+5. The SAA Spectrum
+
+   "The SAA Spectrum" is a newsletter devoted exclusively to SAA,
+   which is related to OS/2. For more information, in the USA, call
+   the SAA Spectrum at (800) 333-5979, extension 100 or
+   (415) 283-5400. Or, write to them at the following address:
+
+      The SAA Spectrum, Inc.
+      P.O. Box 908
+      Lafayette, CA 94549
+      USA
+
+   In the UK, you can call them at 44-0-256-850376, or write to them
+   at the following address:
+
+      The SAA Spectrum, Ltd.
+      P.O. Box 70, Basingstoke
+      Hampshire, RG24 9HW
+      ENGLAND
+
+   In West Germany, Austria, and Switzerland, you can call them at
+   49-0-89-7911073/75 or write to them at the following address:
+
+      SOFTCON GmbH
+      Irmgardstr 15
+      D-8000 Munchen 71
+      WEST GERMANY
+
+   In the Netherlands, you can call them at 31-0-1720-43726, or write
+   to them at the following address:
+
+      Adviesburo voor Telematica B.V.
+      P.O. Box 184
+      2400 AD Alphen aan den Rijn
+      THE NETHERLANDS
+
+6. OS Report
+
+   OS Report is a newsletter devoted exclusively to OS/2. For more
+   information, you can reach them at (603) 924-3636, or write to them
+   at the following address:
+
+      OS Report
+      P.O. Box 3160
+      Peterborough, NH 03458
+      USA
+
+7. First Edition for OS/2
+
+   "First Edition for OS/2" is a newsletter devoted exclusively to
+   OS/2. For more information, you can call them at (800) 624-3282, or
+   write to them at the following address:
+
+      First Edition for OS/2
+      Attn: mailstop 375-1170
+      Department 1703
+      P.O. Box 7050
+      San Francisco, CA 94120-9626
+      USA
+
+
+Information Systems
+-------------------
+
+There are many information fee-based systems that have conferences on
+OS/2.
+
+CompuServe has the PCMAGNET (PC Magazine) forum and the Microsoft
+Systems Forum MSSYS (GO MSSYS). In the MSSYS forum, Section 8 is for
+OS/2 issues and Section 9 is for Presentation Manager issues. Another
+Microsoft forum on CompuServe is the Microsoft Knowledge Base (GO
+MSKB), which contains about 15,000 articles on Microsoft products and
+the Software Library (GO MSL) containing official Microsoft files
+(drivers, MSJ source code, etc.) available for downloading.
+
+There are other systems as well. BIX has the ibm.os2 conference, and
+other information systems, such as GEnie, Prodigy, etc., all have
+similar forums.
+
+
+Bulletin Boards
+---------------
+
+The following is a list of bulletin board systems (BBSs) that have
+OS/2 conferences/forum, and/or have OS/2 files on them.
+
+We make no warranty, implied or otherwise, regarding the information
+obtained from these bulletin boards. This information is provided only
+for your convenience.
+
+Name:     IBM National Support Center BBS
+Number:   (404) 988-2913
+Sysop:    IBM Corp.
+Comments: This BBS, located in Atlanta, Georgia, contains various
+          IBM-related information, including an active forum on OS/2
+          and many OS/2 files, including public domain OS/2 utilities
+          and ASCII copies of IBM OS/2 press releases. Three files of
+          current interest are OS2SE.ANN (IBM OS/2 Standard Edition
+          1.20 press release), OS2EE1_2.ANN (IBM OS/2 Extended Edition
+          1.20 press release), and OS2RBTE.ANN (IBM OS/2 1.20 rebate
+          policy press release).
+
+Name:     Gilmore Systems BBS
+Number:   (805) 582-9306
+Sysop:    Chuck Gilmore
+Comments: This BBS is running under an OS/2-based BBS software
+          package called Magnum made by Gilmore Systems. There are
+          approximately 300 OS/2-related files on this BBS and an OS/2
+          message forum. If you own a 9600-baud US Robotics modem, you
+          can call Gilmore Systems at (805) 581-1275.
+
+Name:     University of Saskatchewan OPUS BBS (Fidonet node 1:140/43)
+Number:   (306) 966-4857
+Sysop:    Kevin Lowey (lowey@sask.usask.ca)
+Comments: Contains OS/2 versions of MicroEMACS 3.9p, Kermit, SEDT, a
+          LISP interpreter, etc.; 300/1200/2400 baud. The OS/2 files
+          are in the OS/2 and GENERAL file areas.
+
+Name:     RamNet BBS
+Number:   (212) 889-6438
+Sysop:    Ross M. Greenberg (greenber@utoday.uucp)
+Comments: This BBS is listed in the "Microsoft Systems Journal" as
+          containing program listings from this journal.
+
+Name:     Channel 1 BBS
+Number:   (617) 354-8873
+Sysop:    <unknown>
+Comments: This BBS is listed in the "Microsoft Systems Journal" as
+          containing program listings from this journal.
+
+Name:     ComOne BBS
+Number:   (415) 284-9151
+Sysop:    <unknown>
+Comments: This BBS is listed in the "Microsoft Systems Journal" as
+          containing program listings from this journal.
+
+Name:     IBM PC User Group Support BBS
+Number:   (404) 988-2796
+Sysop:    IBM Corp.
+Comments: This BBS is listed in "IBM Personal Systems Journal" as
+          containing program listings from this journal.
+
+Name:     PKWARE BBS
+Number:   (414) 352-7176
+Sysop:    PKWARE
+Comments: This is not an OS/2-specific BBS, but it contains the latest
+          versions of the PKZIP/PKUNZIP utilities for OS/2.
+
+Name:     System Enhancement Associates (SEA) BBS
+Number:   (201) 473-1991
+Sysop:    SEA
+Comments: This is not an OS/2-specific BBS, but it contains the latest
+          version of the ARC utility for OS/2.
+
+Name:     DeScribe (formerly LeAP) BBS
+Number:   (916) 929-3237
+Sysop:    DeScribe
+Comments: This is not an OS/2-specific BBS, but it contains a version
+          of the DeScribe editor for OS/2.
+
+Name:     You Bet Your ASCII BBS
+Number:   (818) 989-0310
+Sysop:    Allen Duboff
+Comments: This BBS has a large echomail OS/2 conference.
+
+Name:     Computer Consulting Service
+Number:   (301) 476-5098
+Sysop:    <unknown>
+Comments: This BBS specializes in OS/2 topics/files.
+
+Name:     OhioNet Express
+Number:   (216) 241-6727
+Sysop:    <unknown>
+Comments: This BBS specializes in OS/2 topics/files.
+
+Name:     KBBS
+Number:   (818) 994-0442
+Sysop:    <unknown>
+Comments: This BBS contains OS/2 programs for downloading.
+
+Name:     <unknown>
+Number:   (306) 966-4857
+Sysop:    <unknown>
+Comments: This BBS reportedly contains many OS/2 PM programs, many of
+          which include source code. This BBS has not been contacted
+          by Microsoft.
+
+
+Anonymous FTP Archive Sites
+---------------------------
+
+One anonymous FTP site that contains OS/2 files is the site
+mtsg.ubc.ca (128.189.103.1); move into the OS/2 subdirectory after
+logging in: "cd os2".
+
+The SIMTEL20 archive contains some OS/2 files. The only OS/2-specific
+subdirectory of the site simtel20.army.mil is the "PD:<MSDOS.OS2>".

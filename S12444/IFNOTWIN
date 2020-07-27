@@ -1,0 +1,22 @@
+#****************************************************************************
+#*                                                                          *
+#*                 Copyright (c) Microsoft Corp.  1987, 1990                *
+#*                           All Rights Reserved                            *
+#*                                                                          *
+#****************************************************************************
+
+CFLAGS  = -c -W3 -G2
+LINK    = link
+SLIBS   = slibcep os2
+
+ifnotwin.obj: ifnotwin.c
+    cl $(CFLAGS) $*.c
+
+ifnotwin.exe: ifnotwin.obj
+    $(LINK) $* /NOD/NOI,,NUL,$(SLIBS),ifnotwin.def;
+
+ifwin.obj: ifnotwin.c
+    cl -Fo$@ -DIFWIN $(CFLAGS) ifnotwin.c
+
+ifwin.exe: ifwin.obj
+    $(LINK) $* /NOD/NOI,,NUL,$(SLIBS),ifwin.def;

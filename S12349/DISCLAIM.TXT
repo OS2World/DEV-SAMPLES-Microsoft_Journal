@@ -1,0 +1,3 @@
+ *  This software is provided for demonstration purposes only.
+ *  Microsoft makes no warranty, either express or implied as
+ *  to its usability in any given situation.

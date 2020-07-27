@@ -1,0 +1,9 @@
+# SCCSID: @(#)makefile -- NMAKE-style makefile for NLSINFO.EXE   [FAPI]
+
+CFLAGS        = /Lp /Fb /W3
+
+all:          nlsinfo.exe
+
+nlsinfo.exe:  nlsinfo.c makefile
+              cl $(CFLAGS) nlsinfo.c
+              markexe windowcompat nlsinfo.exe

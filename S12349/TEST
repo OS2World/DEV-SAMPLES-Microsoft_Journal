@@ -1,0 +1,59 @@
+#
+#**     makefile for OS/2 sample device driver
+#
+
+ASM=masm
+
+#       Definitions for assembler
+
+#       To make debug version use --
+#       AFLAGS= /Mx /t /P /DDEBUG /L
+
+#       To make non-debug version use --
+#       AFLAGS= /Mx /t /P
+
+#       /Mx -- perserve case sensitivity in external names
+#       /t  -- "terse" mode, don't print out unneeded messages
+#       /P  -- check for IMPURE code
+#       /L  -- Create a listing file
+#       /n  -- Suppress tables in listing
+#       /Dsymbol  -- Define assembler symbol
+
+AFLAGS= /Mx /T /P /L /DDEBUG
+
+#       Definitions for new style linker
+#       /map -- make a map file
+
+LINK=link
+LFLAGS=/nod /noi /map
+LIBS= e:\pmsdk\lib\doscalls.lib
+
+#       List of object files required
+#       ORDER IS IMPORTANT!
+#       "test_i.obj" must be the last
+#
+
+OBJS=   test.obj test_hi.obj test_i.obj
+
+#       Production rules
+
+test.obj: test.asm
+        $(ASM) $(AFLAGS) test.asm, test.obj;
+
+test_hi.obj: test_hi.asm
+        $(ASM) $(AFLAGS) test_hi.asm, test_hi.obj;
+
+test_i.obj: test_i.asm
+        $(ASM) $(AFLAGS) test_i.asm, test_i.obj;
+
+
+#
+#  build the driver
+#
+
+
+test.sys: $(OBJS)
+        $(LINK) $(LFLAGS) $(OBJS),test.sys,,$(LIBS), test.def;
+
+test.sym: test.map
+        e:\devdrvrs\work\dd\bin\mapsym test
